@@ -1,0 +1,72 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  position: relative; }
+
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table; }
+
+.cf:after {
+  clear: both; }
+
+body {
+  background-color: #222;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  color: white; }
+  body #wrapper {
+    margin: 0 auto;
+    width: 1040px; }
+
+a {
+  text-decoration: none;
+  color: #C41D3D; }
+
+ul {
+  list-style: none;
+  margin: 20px auto; }
+  ul li {
+    margin-bottom: 30px;
+    clear: both;
+    display: inline-block;
+    background: white; }
+    ul li img {
+      width: 600px;
+      height: auto;
+      float: left; }
+    ul li .info {
+      float: left;
+      width: 400px;
+      padding: 20px;
+      max-height: 400px;
+      overflow: auto;
+      text-overflow: ellipsis;
+      color: #222; }
+      ul li .info .title {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: normal; }
+      ul li .info .description {
+        white-space: pre-line;
+        line-height: 20px; }
+      ul li .info .album {
+        opacity: 0.6;
+        display: block;
+        color: #222; }
+
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 5px; }
+
+/*# sourceMappingURL=main.css.map */

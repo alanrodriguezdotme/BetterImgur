@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Better Imgur</title>
+	<meta name="description" content="Better Imgur">
+	<meta name="author" content="Alan Rodriguez">
+
+	<link rel="stylesheet" href="css/main.css">
+
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<header>
+
+</header>
+
+	<div id="wrapper">
+		<ul id="list">
+			<script id="main-template" type="text/x-handlebars-template">
+				{{#each items}}
+				<li class="item">
+						{{#if is_album}}
+						<a href="http://imgur.com/a/{{id}}" target="_blank">
+							<img class="image" src="http://imgur.com/{{cover}}.jpg" />
+						<!--
+						<ul class="album-list">
+							{{#each albumImages}}
+							<li class="album-item">
+								<img class="image" src="http://imgur.com/a/{{id}}/image.jpg" />
+							</li>
+							{{/each}}
+						</ul>
+						-->
+						{{else}}
+						<a href="http://imgur.com/{{id}}" target="_blank">
+							<img class="image" src="{{link}}" />
+						</a>
+						{{/if}}
+					<div class="info">
+						{{#if is_album}}
+						<h2 class="title"><a href="http://imgur.com/a/{{id}}" target="_blank">{{title}}</a></h2>
+						<span class="album">{{images_count}} Images</span>
+						{{else}}
+						<h2 class="title"><a href="http://imgur.com/{{id}}" target="_blank">{{title}}</a></h2>
+						{{/if}}
+						<span class="description">{{description}}</span>
+					</div>
+				</li>
+				{{/each}}
+			</script>
+		</ul>
+	</div>
+
+<footer>
+
+</footer>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/handlebars-v3.0.3.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
