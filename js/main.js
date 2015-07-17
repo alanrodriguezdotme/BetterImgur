@@ -2,8 +2,7 @@ $( document ).ready(function() {
 
 	var clientId = '94b213b0b8e3564',
 		$galleryItems = [],
-		$mainGallery = {},
-		count = 0;
+		$mainGallery = [];
 
 	$.ajax({
 		url: 'https://api.imgur.com/3/gallery/hot/viral/0.json',
@@ -13,9 +12,8 @@ $( document ).ready(function() {
 		},
 		success: function(result) {
 			$galleryItems = result.data;
-			count = $galleryItems.length;
-			console.log($galleryItems);
-			getAlbumImages();
+			$mainGallery = addAlbumsToGallery($galleryItems);
+			// console.log($mainGallery);
 			// init();
 		}
 	});
@@ -25,35 +23,54 @@ $( document ).ready(function() {
 		// Compile Handlebars
 		var source = $('#main-template').html();
 		var template = Handlebars.compile(source);
-		var content = {items: $galleryItems};
+		var content = {items: $mainGallery};
 		var iterate = template(content);
 
 		$('#list').html(iterate);
 	}
 
-	function getAlbumImages() {
+	function getAlbum(id, callback) {
+		var $thisAlbum = {};
 
-		for (i=0; i <= count; i++){
+		$.ajax({
+			url: 'https://api.imgur.com/3/album/' + id,
+			type: 'GET',
+			headers: {
+				Authorization: 'Client-ID ' + clientId
+			},
+			error: function(error) {
+				console.log(error);
+			},
+			success: function(result) {
+				$thisAlbum = result.data;
+			}
+		})
+		.done(function(){
+			// console.log($thisAlbum);
+			return $thisAlbum;
+		});
+	}
 
-			if ($galleryItems[i].is_album == true) {
+	function addAlbumsToGallery(fullGallery) {
 
-				$.ajax({
-					url: 'https://api.imgur.com/3/album/' + $galleryItems[i].id,
-					type: 'GET',
-					headers: {
-						Authorization: 'Client-ID ' + clientId,
-					},
-					success: function(result) {
-						$.extend($mainGallery, result.data)
-					}
-				});
+		var count = fullGallery.length,
+			finalGallery = [];
+
+		console.log("fullGallery: " + count);
+
+		for (i=0; i < count; i++){
+
+			if (fullGallery[i].is_album) {
+				var $album = getAlbum(fullGallery[i].id)
+				finalGallery.push($album);
 
 			} else {
-				// $mainGallery.push($galleryItems[i]);
+				finalGallery.push(fullGallery[i]);
 			}
 		}
-
-		console.log($mainGallery);
+		console.log("finalGallery: " + finalGallery.length);
+		console.log(finalGallery);
+		return finalGallery;
 
 	}
 

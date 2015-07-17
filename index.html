@@ -25,25 +25,21 @@
 			<script id="main-template" type="text/x-handlebars-template">
 				{{#each items}}
 				<li class="item">
-						{{#if is_album}}
-						<a href="http://imgur.com/a/{{id}}" target="_blank">
-							<img class="image" src="http://imgur.com/{{cover}}.jpg" />
-						<!--
+						{{#if images}}
 						<ul class="album-list">
-							{{#each albumImages}}
+							{{#each images}}
 							<li class="album-item">
-								<img class="image" src="http://imgur.com/a/{{id}}/image.jpg" />
+								<img class="image" src="{{images.link}}" />
 							</li>
 							{{/each}}
 						</ul>
-						-->
 						{{else}}
 						<a href="http://imgur.com/{{id}}" target="_blank">
 							<img class="image" src="{{link}}" />
 						</a>
 						{{/if}}
 					<div class="info">
-						{{#if is_album}}
+						{{#if images}}
 						<h2 class="title"><a href="http://imgur.com/a/{{id}}" target="_blank">{{title}}</a></h2>
 						<span class="album">{{images_count}} Images</span>
 						{{else}}
@@ -61,7 +57,7 @@
 
 </footer>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/jquery-2.1.4.min.js"></script>
 	<script src="js/handlebars-v3.0.3.js"></script>
 	<script src="js/main.js"></script>
 </body>
