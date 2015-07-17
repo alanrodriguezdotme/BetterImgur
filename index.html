@@ -24,30 +24,11 @@
 		<ul id="list">
 			<script id="main-template" type="text/x-handlebars-template">
 				{{#each items}}
-				<li class="item">
-						{{#if images}}
-						<ul class="album-list">
-							{{#each images}}
-							<li class="album-item">
-								<img class="image" src="{{images.link}}" />
-							</li>
-							{{/each}}
-						</ul>
-						{{else}}
-						<a href="http://imgur.com/{{id}}" target="_blank">
-							<img class="image" src="{{link}}" />
-						</a>
-						{{/if}}
-					<div class="info">
-						{{#if images}}
-						<h2 class="title"><a href="http://imgur.com/a/{{id}}" target="_blank">{{title}}</a></h2>
-						<span class="album">{{images_count}} Images</span>
-						{{else}}
-						<h2 class="title"><a href="http://imgur.com/{{id}}" target="_blank">{{title}}</a></h2>
-						{{/if}}
-						<span class="description">{{description}}</span>
-					</div>
-				</li>
+					{{#if this.images}}
+						{{#each images}}
+						<li>{{link}}</li>
+						{{/each}}
+					{{/if}}
 				{{/each}}
 			</script>
 		</ul>

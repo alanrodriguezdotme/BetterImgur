@@ -1,8 +1,8 @@
 $( document ).ready(function() {
 
 	var clientId = '94b213b0b8e3564',
-		$galleryItems = [],
-		$mainGallery = [];
+		galleryItems = [],
+		mainGallery = [];
 
 	$.ajax({
 		url: 'https://api.imgur.com/3/gallery/hot/viral/0.json',
@@ -11,10 +11,8 @@ $( document ).ready(function() {
 			Authorization: 'Client-ID ' + clientId,
 		},
 		success: function(result) {
-			$galleryItems = result.data;
-			$mainGallery = addAlbumsToGallery($galleryItems);
-			// console.log($mainGallery);
-			// init();
+			galleryItems = result.data;
+			addAlbumsToGallery(galleryItems);
 		}
 	});
 
@@ -23,16 +21,15 @@ $( document ).ready(function() {
 		// Compile Handlebars
 		var source = $('#main-template').html();
 		var template = Handlebars.compile(source);
-		var content = {items: $mainGallery};
+		var content = {items: mainGallery};
 		var iterate = template(content);
 
 		$('#list').html(iterate);
 	}
 
-	function getAlbum(id, callback) {
-		var $thisAlbum = {};
+	function getAlbum(id, gallery) {
 
-		$.ajax({
+		return $.ajax({
 			url: 'https://api.imgur.com/3/album/' + id,
 			type: 'GET',
 			headers: {
@@ -42,12 +39,8 @@ $( document ).ready(function() {
 				console.log(error);
 			},
 			success: function(result) {
-				$thisAlbum = result.data;
+				gallery.push(result.data);
 			}
-		})
-		.done(function(){
-			// console.log($thisAlbum);
-			return $thisAlbum;
 		});
 	}
 
@@ -58,20 +51,26 @@ $( document ).ready(function() {
 
 		console.log("fullGallery: " + count);
 
+		var tasks = [];
+
 		for (i=0; i < count; i++){
 
 			if (fullGallery[i].is_album) {
-				var $album = getAlbum(fullGallery[i].id)
-				finalGallery.push($album);
-
+				tasks.push(getAlbum(fullGallery[i].id, finalGallery));
 			} else {
 				finalGallery.push(fullGallery[i]);
 			}
 		}
-		console.log("finalGallery: " + finalGallery.length);
-		console.log(finalGallery);
-		return finalGallery;
+
+		$.when.apply(this, tasks)
+		.done(function(){
+			console.log("finalGallery: " + finalGallery.length);
+			$.merge(mainGallery, finalGallery);
+		})
+		.done(function(){
+			console.log(mainGallery);
+			init();
+		});
 
 	}
-
 });
