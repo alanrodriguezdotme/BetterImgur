@@ -1,7 +1,7 @@
 // VARIABLES
 $black: #222
 $link: #C41D3D
-$font-stack: Helvetica, sans-serif
+$font-stack: 'Open Sans', Helvetica, sans-serif
 
 // RESETS & FIXES
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -27,58 +27,185 @@ table, caption, tbody, tfoot, thead, tr, th, td
     clear: both
 
 // MAIN STYLES
+html, body
+    height: 100%
+
 body 
     background-color: $black
     font-family: $font-stack
     font-size: 14px
+    font-weight: 100
     color: white
-
-    #wrapper
-        margin: 0 auto
-        width: 1040px
 
 a
     text-decoration: none
-    color: $link
+    color: white
 
-ul
-    list-style: none
-    margin: 20px auto
+    &:hover
+        color: $link
 
-    li
-        margin-bottom: 30px
-        clear: both
-        display: inline-block
-        background: white
-
-        img
-            width: 600px
-            height: auto
-            float: left
-
-        .info
-            float: left
-            width: 400px
-            padding: 20px
-            max-height: 400px
-            overflow: auto
-            text-overflow: ellipsis
-            color: $black
-
-            .title
-                margin-bottom: 10px
-                font-size: 24px
-                font-weight: normal
-
-            .description
-                white-space: pre-line
-                line-height: 20px
-
-            .album
-                opacity: 0.6
-                display: block
-                color: $black
+img
+    height: auto
+    max-width: 600px
+    margin: 0 auto
 
 h2
     font-size: 1.2em
     margin-bottom: 5px
+
+header
+    width: 100%
+    height: 50px
+    padding: 50px 0
+
+    .main-title
+        margin: 0 auto
+        text-align: center
+        font-size: 2em
+        font-weight: 100
+
+#wrapper
+    margin: 0 auto
+    width: 600px
+
+    .main-title
+        font-size: 1.5em
+        font-weight: lighter
+        text-align: center
+        width: 100%
+        margin: 0 auto
+        padding: 15px 0
+
+#gallery-list
+    list-style: none
+
+    .gallery-item
+        padding: 100px 0
+        clear: both
+        display: inline-block
+        width: 600px
+        text-align: center
+
+        &:first-of-type
+            padding: 0 0 100px
+
+        .album-title
+            padding: 30px
+            font-size: 2em
+            font-weight: lighter
+
+        .bx-wrapper
+
+            .bx-viewport
+                box-shadow: 0
+                -webkit-box-shadow: 0
+                border: 0
+                left: 0
+
+                .album-list
+                    height: 100%
+
+                    .album-item
+                        height: 100%
+
+                        .album-image-wrapper
+                            width: 100%
+                            position: relative
+                            top: 0
+
+                            .album-image
+                                position: relative
+
+                        .info
+                            position: relative
+                            bottom: 0
+
+            .bx-controls
+                display: inline-block
+                padding: 20px 0
+
+                .bx-pager
+                    padding-top: 0
+
+                .bx-controls-direction
+                    position: relative
+                    margin: 0 auto
+                    width: 250px
+                    top: 42px
+
+        .info
+            width: 100%
+            padding-top: 30px
+            overflow: auto
+            text-overflow: ellipsis
+            color: white
+            text-align: left
+            position: relative
+            text-align: left
+
+            .title
+                margin-bottom: 40px
+                font-size: 2em
+                font-weight: lighter
+                text-align: center
+
+            .description
+                white-space: pre-line
+                line-height: 20px
+                width: auto
+
+            .album
+                opacity: 0.6
+                display: block
+                color: white
+
+#pagination
+    width: 100%
+    text-align: center
+    padding-bottom: 100px
+
+    .next
+        margin: 0 auto
+
+        &:hover
+            cursor: pointer
+            color: $link
+
+
+
+@media (max-width: 599px)
+
+    header
+        padding: 30px 0
+
+    #wrapper
+        width: 90vw
+
+        #gallery-list
+            width: 100%
+
+            .gallery-item
+                width: 100%
+
+                .album-title
+                    font-size: 2.5em
+
+                img
+                    max-width: 100%
+
+                .info
+                    width: 100%
+
+                    .title 
+                        font-size: 2em
+                        margin: 0 20px
+
+                    .description
+                        font-size: 1.25em
+                        line-height: 1.6em
+                        margin: 20px
+    
+        #pagination
+
+            .next
+                font-size: 1.5em
