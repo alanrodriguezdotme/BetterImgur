@@ -25,7 +25,8 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#pagination').hide();
+	$('.next').hide();
+	$('.spinner').show();
 
 	$('.next').on('click', function() {
 		pagination(galleryItems);
@@ -49,8 +50,6 @@ $(document).ready(function() {
 
 		gallerySection = galleryItems.slice(0, 10);
 		galleryItems.splice(0, 10);
-		console.log(galleryItems);
-		console.log(gallerySection);
 		addTemplate();
 
 	}
@@ -77,6 +76,9 @@ $(document).ready(function() {
 		var iterate = template(content);
 		$('#gallery-list').html(iterate);
 
+		$('.next').css('display', 'block');
+		$('.spinner').css('display', 'none');
+
 		// Make albums into slider
 		$('.album-list').bxSlider({
 			speed: 250,
@@ -85,8 +87,6 @@ $(document).ready(function() {
 			pagerType: 'short',
 			keyboardEnabled: 'true'
 		});
-
-		$('#pagination').show();
 
 		// // Infinite scrolling using Waypoints.js
 		// var infinite = new Waypoint.Infinite({
@@ -131,6 +131,9 @@ $(document).ready(function() {
 
 		var albums = [],
 			tasks = [];
+			
+		$('.next').hide();
+		$('.spinner').show();
 
 		$.each(gallery, function(i, data) {
 			if (data.is_album) {
